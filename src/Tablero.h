@@ -1,0 +1,1 @@
+// vector de structs (un struc de casilla)
