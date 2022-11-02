@@ -50,4 +50,4 @@ Hansell Solís Ramírez, C07677
 
 Judith Vargas Esquivel, C08168
 
-Henry Ledezma
+Henry Ledezma Vindas, C04185
