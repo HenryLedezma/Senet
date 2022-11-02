@@ -1,13 +1,14 @@
 #include <cstdlib>
-class Dado {
-  int azar();
+class Dado{
+    public:
+        int azar();
 };
 
-int Dado::azar() {
-  int numero = 0;
-  numero = rand() % 6;
-  if (5 == numero) {
-    numero = 6;
-  }
-  return numero;
+int Dado::azar(){
+    int numero = 0;
+    numero = 1 + rand() % (6-1);
+    if (5 == numero){
+        numero = 6;
+    }
+    return numero;
 }
