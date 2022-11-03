@@ -190,3 +190,11 @@ void Mediador::setupTablero(Tablero &tablero) {
     tablero.tablero[i].ficha = ficha;
   }
 }
+
+bool Mediador::sigoJugando(int num_dado) {
+  if (num_dado == 2 || num_dado) {
+    return false;
+  } else {
+    return true;
+  }
+}

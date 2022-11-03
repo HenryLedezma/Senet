@@ -66,6 +66,12 @@ public:
   */
   void setupTablero(Tablero &tablero);
 
+  /** 
+   @brief Revisa si algún jugador ganó la partida
+   @return Alguna de las 3 flags definidas
+  */
+  bool sigoJugando(int num_dado);
+
 //private:
   /**
    @brief Cuando se cae en el Río Nilo
