@@ -40,7 +40,7 @@ public:
   */
   bool verificarProteccion(int posicion, int tipo, Tablero &tablero);
 
-  /** VIEJO identFichaMovible 
+  /** 
    @brief Realiza todas las verificaciones y mueve la ficha según el caso
    @param ficha ficha a mover
    @param movientos Cantidad de casillas a mover
