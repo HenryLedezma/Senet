@@ -1,25 +1,58 @@
-class Ficha{
-  public:
-    struct ficha {
-      // 1 jugador 1 y 2 jugador 2.
-      int jugador;
-      int posicion;
-      // 0 desprotegido y 1 protegido.
-      int protegido;
-    };
-    ficha* crearFicha(int posicion);
+/*
+*   Clase que simula ser una ficha del tablero
+*/
+
+#ifndef FICHA_H
+#define FICHA_H
+
+/**
+ @brief Simula ser un ficha de algun jugador
+*/
+class Ficha {
+public:
+  /**
+    @brief Constructor de ficha
+    @param player Identificador del jugador, 1 o 2
+    @param pos Identifica la posción donde estará la ficha
+  */
+  Ficha(int player, int pos);
+
+  /**
+    @brief Default constructor
+  */
+  Ficha();
+
+
+  /**
+    @return La posición de la ficha
+  */
+  int getPosicion();
+
+  /**
+    @return Dueño de la ficha
+  */
+  int getJugadorID();
+  
+  /**
+    @return Si una ficha está protegida, 0
+    0 Desprotegido
+    1 Protegido
+  */
+  int isProtected();
+  
+// Commented for testing private:
+  /**
+   ID del jugador dueño de la ficha
+  */
+  int jugador;
+  /**
+   *Posición actual de la ficha
+  */
+  int posc;
+  /**
+   Indica si la ficha está protegida
+  */
+  int protegido;
 };
 
-
-Ficha::ficha* Ficha::crearFicha(int posicion){
-  ficha* fic = new ficha;
-  if(posicion%2 == 0){
-    fic->jugador = 1;
-  } else {
-    fic->jugador = 2;
-  }
-  fic->posicion = posicion;
-  fic->protegido = 0;
-  return fic;
-}
-
+#endif // FICHA_H

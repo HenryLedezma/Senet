@@ -1,14 +1,14 @@
-#include <cstdlib>
-class Dado{
-    public:
-        int azar();
-};
+/*
+*   Simula tirar un dado
+*/
 
-int Dado::azar(){
-    int numero = 0;
-    numero = 1 + rand() % (6-1);
-    if (5 == numero){
-        numero = 6;
-    }
-    return numero;
-}
+#ifndef DADO_H
+#define DADO_H
+
+/**
+ @brief Simula tirar un dado
+ @return un entero entre 1 y 6, menos el 5
+*/
+int rollDice();
+
+#endif  // DADO_H
