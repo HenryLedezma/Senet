@@ -8,16 +8,9 @@
 
 using namespace std;
 
-Mediador::Mediador() {
-  //tablero = tablero;
-}
+Mediador::Mediador() {}
 
 bool Mediador::verificarBarreras(Ficha &ficha, int movimientos, Tablero &tablero) {
-  cout << "<Verificando si existe una barrera>\n";
-  cout << "Posicion de ficha actual: "<<ficha.getPosicion() << endl;
-  cout << "La ficha pertenece a jugador de tipo: " <<ficha.getJugadorID() << endl;
-  cout << "Movimientos a realizar "<<movimientos <<endl <<endl;
-
   int barrera = 0;
   int limite = ficha.getPosicion() + movimientos;
   for (int i = ficha.getPosicion(); i < limite; i++) {
@@ -28,6 +21,7 @@ bool Mediador::verificarBarreras(Ficha &ficha, int movimientos, Tablero &tablero
         barrera = 0;
       }
       if (barrera == 3) {
+        cout << "Existe una barrea!\n";
         return true;
       }
     }
@@ -40,6 +34,7 @@ bool Mediador::verificarProteccion(int posicion, int tipo, Tablero &tablero) {
   tablero.tablero[posicion - 2].ocupada == 1) {
     if(tablero.tablero[posicion - 1].ficha.getJugadorID() != tipo 
     && tablero.tablero[posicion - 2].ficha.getJugadorID() != tipo){
+      cout << "Existe una protección!\n";
       return true;
     } 
   }
@@ -48,6 +43,7 @@ bool Mediador::verificarProteccion(int posicion, int tipo, Tablero &tablero) {
   && tablero.tablero[posicion + 2].ocupada == 1){
     if(tablero.tablero[posicion + 1].ficha.getJugadorID() != tipo 
     && tablero.tablero[posicion + 2].ficha.getJugadorID() != tipo){
+      cout << "Existe una protección!\n";
       return true;
     }
   }
@@ -82,14 +78,15 @@ void Mediador::moverFicha(Ficha &ficha, int nuevaP, Tablero &tablero) {
 }
 
 void Mediador::intercambiar(Ficha &ficha, int nuevaP, Tablero &tablero) {
-  // Almacenar la que se intercambia
-  Ficha aux = tablero.tablero[ficha.getPosicion()].ficha;
+  // almena ficha en posc a intercambiar
+  Ficha aux_original = tablero.tablero[ficha.getPosicion()].ficha;
+  int posc_original = ficha.getPosicion();
 
-  // Hace el intercambio
-  tablero.tablero[ficha.getPosicion()].ficha = tablero.tablero[nuevaP].ficha;
-  tablero.tablero[nuevaP].ficha.posc = ficha.getPosicion();
-  aux.posc = nuevaP;
-  tablero.tablero[nuevaP].ficha = aux;
+  // hace intercambio
+  tablero.tablero[posc_original].ficha = tablero.tablero[nuevaP].ficha;
+  tablero.tablero[nuevaP].ficha = aux_original;
+
+  cout << "Hubo un intercambio!\n";
 }
 
 bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tablero) {
@@ -99,13 +96,14 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
     (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
     return true;
   }
+
   int verificar = -5;
-  if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1)
-  {
+  if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1) {
     verificar = tablero.tablero[ficha.getPosicion() + movimientos].ficha.getJugadorID();
   }
-  if (tablero.tablero[ficha.getPosicion()].ficha.getJugadorID() != verificar)
-  {
+
+  if (tablero.tablero[ficha.getPosicion()].ficha.getJugadorID() != verificar) {
+    /* TIROS ESPECIALES */
     // Si la ficha que va a mover se haya en las casillas especiales.
     if (ficha.getPosicion() == 25 || 27 || 28)
     {
@@ -127,45 +125,37 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
     }
 
     // Si cae en la casilla NILO
-    if ((ficha.getPosicion() + movimientos) == 26)
-    {
+    if ((ficha.getPosicion() + movimientos) == 26) {
       int nuevaP = verificarCaida(tablero);
       moverFicha(ficha, nuevaP, tablero);
       return true;
     }
-    // Tiros normales.
+    /* TIROS NORMALES */
     bool puede;
     // Verificar si existe alguna barrera.
-    if (verificarBarreras(ficha, movimientos, tablero) == true)
-    {
+    if (verificarBarreras(ficha, movimientos, tablero) == true) {
       return false;
     }
-    else
-    {
+    else {
       // Si no existe una barrera; y la casilla está ocupada.
-      if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1)
-      {
+      if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1) {
         // Si la ficha dentro de la casilla tiene no tiene protección.
-        if (verificarProteccion(ficha.getPosicion() + movimientos,
-                                ficha.getJugadorID(), tablero) == false)
-        {
-          intercambiar(ficha, ficha.posc + movimientos, tablero);
+        if (verificarProteccion(ficha.getPosicion() + movimientos,ficha.getJugadorID(), tablero) == false) {
+          intercambiar(ficha, ficha.getPosicion() + movimientos, tablero);
           return true;
         }
-        else
-        {
+        else {
           return false;
         }
       }
-      else
-      {
+      else {
+        cout << "La ficha se mueve con normalidad!\n";
         moverFicha(ficha, ficha.getPosicion() + movimientos, tablero);
         return true;
       }
     }
   }
-  else
-  {
+  else {
     return false;
   }
 }
@@ -192,7 +182,7 @@ void Mediador::setupTablero(Tablero &tablero) {
 }
 
 bool Mediador::sigoJugando(int num_dado) {
-  if (num_dado == 2 || num_dado) {
+  if ((num_dado == 2) || (num_dado == 3)) {
     return false;
   } else {
     return true;
