@@ -91,7 +91,7 @@ void Mediador::intercambiar(Ficha &ficha, int nuevaP, Tablero &tablero) {
 
 bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tablero) {
   // En caso de que la ficha salga del tablero
-  if (ficha.getPosicion() + movimientos > 29) {
+  if (ficha.getPosicion()  ==  23 && movimientos == 6) {
     tablero.tablero[ficha.getPosicion()].ocupada = 0;
     (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
     return true;
@@ -105,53 +105,70 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
   if (tablero.tablero[ficha.getPosicion()].ficha.getJugadorID() != verificar) {
     /* TIROS ESPECIALES */
     // Si la ficha que va a mover se haya en las casillas especiales.
-    if (ficha.getPosicion() == 25 || 27 || 28)
+    if (ficha.getPosicion() == 25 || ficha.getPosicion() == 27 || ficha.getPosicion() == 28)
     {
-      if (ficha.getPosicion() == 25 && movimientos == 3)
+      if (ficha.getPosicion() == 25)
       {
-        tablero.tablero[25].ocupada = 0;
-        return true;
+        if(movimientos == 4){
+          tablero.tablero[25].ocupada = 0;
+          (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
+          return true;
+        }else{
+          return false;
+        }
+
       }
       if (ficha.getPosicion() == 27 && movimientos == 2)
       {
-        tablero.tablero[27].ocupada = 0;
-        return true;
-      }
-      if (ficha.getPosicion() == 28 && movimientos == 1)
-      {
-        tablero.tablero[28].ocupada = 0;
-        return true;
-      }
-    }
-
-    // Si cae en la casilla NILO
-    if ((ficha.getPosicion() + movimientos) == 26) {
-      int nuevaP = verificarCaida(tablero);
-      moverFicha(ficha, nuevaP, tablero);
-      return true;
-    }
-    /* TIROS NORMALES */
-    bool puede;
-    // Verificar si existe alguna barrera.
-    if (verificarBarreras(ficha, movimientos, tablero) == true) {
-      return false;
-    }
-    else {
-      // Si no existe una barrera; y la casilla está ocupada.
-      if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1) {
-        // Si la ficha dentro de la casilla tiene no tiene protección.
-        if (verificarProteccion(ficha.getPosicion() + movimientos,ficha.getJugadorID(), tablero) == false) {
-          intercambiar(ficha, ficha.getPosicion() + movimientos, tablero);
+        if(movimientos == 2){
+          tablero.tablero[27].ocupada = 0;
+          (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
           return true;
-        }
-        else {
+        }else{
           return false;
         }
       }
-      else {
-        cout << "La ficha se mueve con normalidad!\n";
-        moverFicha(ficha, ficha.getPosicion() + movimientos, tablero);
+      if (ficha.getPosicion() == 28 && movimientos == 1)
+      {
+        if(movimientos == 1){
+          tablero.tablero[28].ocupada = 0;
+          (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
+          return true;
+        }else{
+          return false;
+        }
+      }
+ 
+    } else{
+      // Si cae en la casilla NILO
+      if ((ficha.getPosicion() + movimientos) == 26) {
+        int nuevaP = verificarCaida(tablero);
+        moverFicha(ficha, nuevaP, tablero);
         return true;
+      }
+      /* TIROS NORMALES */
+      bool puede;
+      // Verificar si existe alguna barrera.
+      if (verificarBarreras(ficha, movimientos, tablero) == true) {
+        return false;
+      }
+      else {
+        // Si no existe una barrera; y la casilla está ocupada.
+        if (tablero.tablero[ficha.getPosicion() + movimientos].ocupada == 1) {
+          // Si la ficha dentro de la casilla tiene no tiene protección.
+          if (verificarProteccion(ficha.getPosicion() + movimientos,ficha.getJugadorID(), tablero) == false) {
+            intercambiar(ficha, ficha.getPosicion() + movimientos, tablero);
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
+        else {
+          cout << "La ficha se mueve con normalidad!\n";
+          moverFicha(ficha, ficha.getPosicion() + movimientos, tablero);
+          return true;
+        }
       }
     }
   }
