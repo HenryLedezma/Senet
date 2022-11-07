@@ -6,6 +6,9 @@ El programa se encarga de simular el juego egipsio **Senet**. Esto cumple con el
 
 
 # _Manual de usuario_
+## Modo de uso
+El juego se puede jugar de dos formas, por terminal o por medio de una _GUI_ construida con el programa _QT_. A continuación se dan instrucciones de cómo construir y correr el juego en consola. Para correrlo con la _GUI_ deberá instalar el programa y construir el programa.
+
 ## ¿Cómo construir el proyecto?
 Ingrese el comando: 
 
@@ -15,6 +18,11 @@ Ingrese el comando:
 Ingrese el comando: 
 
     make run
+
+## ¿Cómo limpiar los archivos generados por el programa?
+Ingrese el comando: 
+
+    make clean
 
 # _Reglas del Juego_
 
