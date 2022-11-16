@@ -86,10 +86,26 @@ public:
   void moverFicha(Ficha &ficha, int nuevaP, Tablero &tablero);
 
   /**
+   @brief Se encarga de guardar la partida actual
+   @param tablero tablero del juego
+  */
+  void guardar(Tablero &tablero) {}
+
+  /**
+   @brief Se encargar de cargar la ultima partida
+   @param tablero tablero del juego
+  */
+  void cargar(Tablero &tablero) {}
+
+  /**
    Cuántas fichas restantes tiene cada jugador
   */
   int fichasLeftPlayer1 = 5;
   int fichasLeftPlayer2 = 5;
 };
+
+
+
+
 
 #endif // MEDIADOR_H

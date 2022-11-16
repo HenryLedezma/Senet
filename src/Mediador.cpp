@@ -4,8 +4,9 @@
 */
 
 #include <iostream>
+#include <fstream>
+#include<string>
 #include "Mediador.h"
-
 using namespace std;
 
 Mediador::Mediador() {}
@@ -204,4 +205,53 @@ bool Mediador::sigoJugando(int num_dado) {
   } else {
     return true;
   }
+}
+
+void Mediador::guardar(Tablero &tablero) {
+  ofstream guardar;
+  guardar.open("partida.csv", ios::out | ios::app);
+  string jugador1 = "";
+  string jugador2 = "";
+
+  for (int i = 0; i < 30; i++) {
+    if (tablero.tablero[i].ocupada == 1){
+      if(tablero.tablero[i].ficha.jugador == 1){
+        jugador1+=to_string(tablero.tablero[i].ficha.posc);
+        jugador1+=",";
+      }
+      if(tablero.tablero[i].ficha.jugador == 2){
+        jugador2+=to_string(tablero.tablero[i].ficha.posc);
+        jugador2+=",";
+      }
+    }
+  }
+  jugador1.pop_back();
+  jugador2.pop_back();
+  guardar<<jugador1<<'\n';
+  guardar<<",30,"<<'\n';
+  guardar<<jugador2<<'\n';
+}
+
+void Mediador::cargar(Tablero &tablero) {
+  ifstream archivo("partida.csv");
+  string linea;
+  char delimitador = ',';
+  int jugador = 1;
+  int posicion = 0;
+  int cantidadF = 0;
+  // Leemos todas las líneas
+  while (getline(archivo, linea, delimitador)){      
+    if(linea == "30"){
+      fichasLeftPlayer1 = cantidadF;
+      jugador = 2;
+      cantidadF = 0;
+    }
+    if(linea != "30"){
+      posicion = stoi(linea);
+      tablero.tablero[posicion].ficha.jugador = jugador;
+      cantidadF += 1;
+      fichasLeftPlayer2 = cantidadF;
+    }
+  }
+  archivo.close();
 }
