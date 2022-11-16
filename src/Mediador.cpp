@@ -239,6 +239,10 @@ void Mediador::cargar(Tablero &tablero) {
   int jugador = 1;
   int posicion = 0;
   int cantidadF = 0;
+  // Limpiar tablero primero
+  for (int i = 0; i < 30; i++) {
+    tablero.tablero[i].ocupada = 0;
+  }
   // Leemos todas las líneas
   while (getline(archivo, linea, delimitador)){      
     if(linea == "30"){
@@ -249,6 +253,7 @@ void Mediador::cargar(Tablero &tablero) {
     if(linea != "30"){
       posicion = stoi(linea);
       tablero.tablero[posicion].ficha.jugador = jugador;
+      tablero.tablero[posicion].ocupada = 1;
       cantidadF += 1;
       fichasLeftPlayer2 = cantidadF;
     }
