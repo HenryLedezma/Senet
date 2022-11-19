@@ -32,7 +32,8 @@ int main() {
   int dado_result = 0;              // Resultado del dado
   int current_turn = TURN_PLAYER1;  // Turno actual, default player 1
   int who_won = 0;                  // Quién ganó la partida
-  bool continue_turn = false;        // Indica si el jugador debe seguir jugando
+  bool continue_turn = false;       // Indica si el jugador debe seguir jugando
+  bool realizoMovimiento = false;   // Indica si se pudo realizar un moviento
 
   while (!winDetected) {
     // Revisa si alguien ha ganado
@@ -54,7 +55,8 @@ int main() {
       dado_result = rollDice();
       printRollDize(dado_result);
       int poscCasilla = selectFicha();
-      mediador.realizarMovimiento(tablero.tablero[poscCasilla - 1].ficha, dado_result, tablero);
+      realizoMovimiento = mediador.realizarMovimiento(tablero.tablero[poscCasilla - 1].ficha, dado_result, tablero);
+      realizoMovimiento == true ? cout << "Se realizó el moviento!!!\n" : cout << "No se realizó el moviento...\n";
       continue_turn = mediador.sigoJugando(dado_result);
       if (continue_turn == true) {
         cout << "Sigo jugando!!!\n";

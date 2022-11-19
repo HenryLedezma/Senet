@@ -12,7 +12,7 @@ class Ficha {
 public:
   /**
     @brief Constructor de ficha
-    @param player Identificador del jugador, 1 o 2
+    @param player Identificador del jugador: jug.1 = 1,jug.2 = 2
     @param pos Identifica la posción donde estará la ficha
   */
   Ficha(int player, int pos);

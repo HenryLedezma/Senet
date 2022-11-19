@@ -28,7 +28,7 @@ Ingrese el comando:
 
 1. Se ubican las fichas en el tablero sobre la primera fila intercalando blancas y negras alternativamente, comenzando por la ficha blanca en el casillero1.
 
-2. Empieza aquel que logre sacar 1 (uno), moviendo un espacio la ficha negra ubicada en el casillero 10 hacia el casillero 11.
+2. Empieza el jugador 1.
 
 3. El turno acaba cuando el jugador saca un 2 ó un 3, (pasa el turno después de mover una ficha la cantidad de espacios correspondientes a esta última lanzada). Mientras tanto el jugador sigue lanzando y jugando hasta sacar este 2 ó 3.
 
