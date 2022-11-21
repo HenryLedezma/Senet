@@ -23,12 +23,14 @@ set(PROJECT_SOURCES
         mydialog.h
         mydialog.ui
         Dado.h
+        Dado.cpp
         Ficha.h
         Ficha.cpp
         Tablero.h
         Tablero.cpp
         Mediador.h
         Mediador.cpp
+        Partida.csv
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

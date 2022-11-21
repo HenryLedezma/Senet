@@ -8,12 +8,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->sigTurno->hide();
-    ui->turnoJug->setText("Turno: J1\nFicha : X");
+    if(!this->turno){
+        ui->turnoJug->setText("Turno: J1\nFicha : X");
+    } else{
+        ui->turnoJug->setText("Turno: J2\nFicha : O");
+    }
     ui->endLabel->hide();
     ui->textMove->hide();
     ui->inputMove->hide();
     //Tablero
     mediador.setupTablero(tablero);
+    showTablero(tablero);
+
 
 }
 
@@ -32,18 +38,16 @@ void MainWindow::on_reglasButton_clicked()
 
 void MainWindow::on_tirarDado_clicked()
 {
-    //Dado
+
     int numero = 0;
     numero = 1 + arc4random() % (6-1);
     if (5 == numero){
         numero = 6;
     }
     this->dado_result = numero;
-    QString resultado = QString::number(numero);
+    QString resultado = QString::number(dado_result);
     ui->resultDado->setText(resultado);
-    if(numero == 2 || numero == 3){
-        this->turno = !this->turno;
-    }
+
     //Esconde boton y enseña el otro
     ui->tirarDado->hide();
     ui->textMove->show();
@@ -53,8 +57,11 @@ void MainWindow::on_tirarDado_clicked()
 
 void MainWindow::on_sigTurno_clicked()
 {
-    ui->tirarDado->show();
-    ui->resultDado->clear();
+    //Cambia el turno
+    if(this->dado_result == 2 || this->dado_result == 3){
+        this->turno = !this->turno;
+    }
+    //Imprime el turno del jugador actual
     if(!this->turno){
         ui->turnoJug->setText("Turno: J1\nFicha : X");
     } else{
@@ -62,25 +69,20 @@ void MainWindow::on_sigTurno_clicked()
     }
 
     int poscCasilla = this->inputMove;
+
     mediador.realizarMovimiento(tablero.tablero[poscCasilla - 1].ficha, this->dado_result, tablero);
     showTablero(tablero);
-    //continue_turn = mediador.sigoJugando(this->dado_result);
 
-    //while (continue_turn);
-    // Intercambio de turnos
-    //(current_turn == TURN_PLAYER1) ? current_turn = TURN_PLAYER2 :  current_turn = TURN_PLAYER1;
-
-    //Actualiza tablero del UI
-    //showTablero(this->tablero);
     ui->sigTurno->hide();
+    ui->tirarDado->show();
+    ui->resultDado->clear();
     endGame();
-
 }
 
 
 void MainWindow::showTablero(Tablero tablero)
 {
-    //QString tipoFicha = "";
+
     //Casilla 1
     if(tablero.tablero[0].ocupada == 0){
         ui->casilla->setText("");
@@ -417,10 +419,22 @@ void MainWindow::on_inputMove_returnPressed()
 {
     QString in = ui->inputMove->text();
     ui->inputMove->clear();
-    ui->textMove->hide();
-    ui->inputMove->hide();
-    ui->sigTurno->show();
-    this->inputMove = in.toInt();
+    inputMove = in.toInt();
+    int poscCasilla = inputMove;
+    if(tablero.tablero[poscCasilla - 1].ocupada == 1){
+        if((!turno && tablero.tablero[poscCasilla - 1].ficha.jugador == 1) ^
+                (turno && tablero.tablero[poscCasilla - 1].ficha.jugador == 2)){
+            //Si el que tiene el turno va a hacer un movimiento en una ficha que le pertenece...
+            ui->textMove->hide();
+            ui->inputMove->hide();
+            ui->sigTurno->show();
+            ui->textMove->setText("¿Qué ficha desea mover? Ingresar el número de casilla en que se encuentra esta:");
+        } else{
+            ui->textMove->setText("Esa ficha no le pertenece, por favor intentelo de nuevo");
+        }
+    }else {
+        ui->textMove->setText("Esa casilla no tiene ninguna ficha, intentelo de nuevo");
+    }
 }
 
 void MainWindow::showEndLabel(){
@@ -439,3 +453,16 @@ void MainWindow:: endGame(){
         showEndLabel();
     }
 }
+
+void MainWindow::on_guardarButton_clicked()
+{
+    mediador.guardar(tablero);
+}
+
+
+void MainWindow::on_cargarButton_clicked()
+{
+    mediador.cargar(tablero);
+    showTablero(tablero);
+}
+

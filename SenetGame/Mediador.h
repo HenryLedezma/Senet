@@ -1,4 +1,3 @@
-#pragma once
 /*
 *   Clase mediadora del juego,
 *   Ejecuta movimientos y verifica el estado del juego
@@ -15,7 +14,7 @@
 #define PLAYER1_WINS 1
 // Flag: En caso de que jugador 2 gane
 #define PLAYER2_WINS 2
-// Flag: En caso de que jugador aún nadie gane
+// Flag: En caso de que aún nadie gane
 #define NO_WIN 0
 
 /**
@@ -31,20 +30,41 @@ public:
 
   /**
    @brief Verifica si tres fichas del tipo contrario generan un barrera
+   @param ficha ficha a mover
+   @param movientos Cantidad de casillas a mover
    @param tablero tablero del juego
   */
   bool verificarBarreras(Ficha &ficha, int movimientos, Tablero &tablero);
 
   /**
    @brief Verifica si dos fichas del tipo contrario generan una protección
-   @param tablero tablero del juego
-  */
-  bool verificarProteccion(int posicion, int tipo, Tablero &tablero);
-
-  /** VIEJO identFichaMovible
-   @brief Realiza todas las verificaciones y mueve la ficha según el caso
    @param ficha ficha a mover
    @param movientos Cantidad de casillas a mover
+   @param tablero tablero del juego
+  */
+  bool verificarProteccion(Ficha &ficha, int movimientos, Tablero &tablero);
+
+  /**
+   @brief Verifica si una ficha cae en las casillas 26, 28 o 29
+   @param ficha ficha a mover
+   @param movientos Cantidad de casillas a mover
+   @param tablero tablero del juego
+  */
+  bool verificarCasillaEspecial(Ficha &ficha, int movimientos, Tablero &tablero);
+
+  /**
+   @brief Verifica si una ficha saldría del tablero al realizar el mov.
+   @param ficha ficha a mover
+   @param movientos Cantidad de casillas a mover
+   @param tablero tablero del juego
+  */
+  bool verificarSalidaTablero(Ficha &ficha, int movimientos, Tablero &tablero);
+
+  /**
+   @brief Busca todas las validaciones necesarias para realizar un movimiento
+   @param ficha ficha a mover
+   @param movientos Cantidad de casillas a mover
+   @param tablero tablero del juego
   */
   bool realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tablero);
 
@@ -75,9 +95,20 @@ public:
 
 //private:
   /**
-   @brief Cuando se cae en el Río Nilo
+   @brief Cuando se cae en el Río Nilo, casilla 15
+   @param tablero tablero del juego
+   @return La posc. que tendría la ficha después de la caída
   */
-  int verificarCaida(Tablero &tablero);
+  int calcularCaidaNilo(Tablero &tablero);
+
+  /**
+   @brief Cuando no se puede avanzar, se retrocede. Calcula nueva posc.
+   @param ficha ficha a mover
+   @param movientos Cantidad de casillas a mover
+   @param tablero tablero del juego
+   @return La posc. que la ficha tendría después de retroceder
+  */
+  int calcularRetroceso(Ficha &ficha, int movimientos, Tablero &tablero);
 
   /**
    @brief Realiza la acción de mover una ficha
@@ -85,6 +116,18 @@ public:
    @param nuevaP Nueva posición de la ficha
   */
   void moverFicha(Ficha &ficha, int nuevaP, Tablero &tablero);
+
+  /**
+   @brief Se encarga de guardar la partida actual
+   @param tablero tablero del juego
+  */
+  void guardar(Tablero &tablero);
+
+  /**
+   @brief Se encargar de cargar la ultima partida
+   @param tablero tablero del juego
+  */
+  void cargar(Tablero &tablero);
 
   /**
    Cuántas fichas restantes tiene cada jugador

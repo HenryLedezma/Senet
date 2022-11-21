@@ -1,4 +1,3 @@
-#pragma once
 /*
 *   Clase que simula ser una ficha del tablero
 */
@@ -30,7 +29,7 @@ public:
   int getPosicion();
 
   /**
-    @return Dueño de la ficha
+    @return Dueño de la ficha, 1 o 2
   */
   int getJugadorID();
 
