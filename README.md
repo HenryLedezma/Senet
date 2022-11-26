@@ -7,22 +7,10 @@ El programa se encarga de simular el juego egipsio **Senet**. Esto cumple con el
 
 # _Manual de usuario_
 ## Modo de uso
-El juego se puede jugar de dos formas, por terminal o por medio de una _GUI_ construida con el programa _QT_. A continuación se dan instrucciones de cómo construir y correr el juego en consola. Para correrlo con la _GUI_ deberá instalar el programa y construir el programa.
+El juego se puede jugar de dos formas, por terminal o por medio de una _GUI_ construida con el programa _QT_. A continuación se dan instrucciones de cómo construir y correr el juego en consola. Para correrlo con la _GUI_ deberá instalar el programa y construir el programa. IMPORTANTE: El ejecutable únicamente funciona en el sistema operativo de Linux, siempre y cuando se tenga instalado QT, y sus librerias para hacer uso de la interfaz.
 
-## ¿Cómo construir el proyecto?
-Ingrese el comando: 
-
-    make
-
-## ¿Cómo correr el programa?
-Ingrese el comando: 
-
-    make run
-
-## ¿Cómo limpiar los archivos generados por el programa?
-Ingrese el comando: 
-
-    make clean
+## _Como correr el archivo ejecutable:_
+Debe irse a la terminal, a la carpeta /exe, y estando aqui, hacer doble click a la aplicacion.
 
 # _Reglas del Juego_
 
