@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "mydialog.h"
+#include <cstdlib>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -40,7 +41,7 @@ void MainWindow::on_tirarDado_clicked()
 {
 
     int numero = 0;
-    numero = 1 + arc4random() % (6-1);
+    numero = 1 + rand() % (6-1);
     if (5 == numero){
         numero = 6;
     }

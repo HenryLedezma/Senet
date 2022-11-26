@@ -256,7 +256,7 @@ bool Mediador::sigoJugando(int num_dado) {
 
 void Mediador::guardar(Tablero &tablero) {
   ofstream guardar;
-  guardar.open("/Users/henry/Documents/dev/Diseno/SenetGame/Partida.csv", ios::out);
+  guardar.open("../partida.csv", ios::out);
   string jugador1 = "";
   string jugador2 = "";
 
@@ -280,7 +280,7 @@ void Mediador::guardar(Tablero &tablero) {
 }
 
 void Mediador::cargar(Tablero &tablero) {
-  ifstream archivo("/Users/henry/Documents/dev/Diseno/SenetGame/Partida.csv");
+  ifstream archivo("../partida.csv");
   string linea;
   char delimitador = ',';
   int jugador = 1;

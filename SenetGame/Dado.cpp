@@ -7,7 +7,7 @@ class Dado{
 
 int Dado::azar(){
     int numero = 0;
-    numero = 1 + arc4random() % (6-1);
+    numero = 1 + rand() % (6-1);
     if (5 == numero){
         numero = 6;
     }
