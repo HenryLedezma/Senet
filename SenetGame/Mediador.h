@@ -82,12 +82,6 @@ public:
   int checkWin();
 
   /**
-   @brief Settea el tablero con sus posc. iniciales
-   @param tablero tablero del juego
-  */
-  void setupTablero(Tablero &tablero);
-
-  /**
    @brief Revisa si algún jugador ganó la partida
    @return Alguna de las 3 flags definidas
   */

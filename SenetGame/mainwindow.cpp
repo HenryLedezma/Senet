@@ -19,8 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->endLabel->hide();
     ui->textMove->hide();
     ui->inputMove->hide();
-    //Tablero
-    mediador.setupTablero(tablero);
     showTablero(tablero);
 
 

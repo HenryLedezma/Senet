@@ -233,17 +233,6 @@ int Mediador::checkWin() {
   return NO_WIN;
 }
 
-void Mediador::setupTablero(Tablero &tablero) {
-  int initial_casillas = 10;
-  int jugadorID = 0;
-  for (int i = 0; i < initial_casillas; i++) {
-    (i % 2 == 0) ? jugadorID = 1 :  jugadorID = 2;
-    Ficha ficha = Ficha(jugadorID, i);
-    tablero.tablero[i].ocupada = 1;
-    tablero.tablero[i].ficha = ficha;
-  }
-}
-
 bool Mediador::sigoJugando(int num_dado) {
   if ((num_dado == 2) || (num_dado == 3)) {
     return false;
@@ -251,7 +240,6 @@ bool Mediador::sigoJugando(int num_dado) {
     return true;
   }
 }
-
 
 
 void Mediador::guardar(Tablero &tablero) {
