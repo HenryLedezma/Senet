@@ -9,6 +9,7 @@
 
 #include "Mediador.h"
 #include "Tablero.h"
+#include "Dado.h"
 #include "ConstructorSerializadorCSV.h"
 #include "QtWidgets/qlabel.h"
 

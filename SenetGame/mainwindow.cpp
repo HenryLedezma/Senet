@@ -39,15 +39,14 @@ void MainWindow::on_reglasButton_clicked()
 }
 
 
-void MainWindow::on_tirarDado_clicked()
-{
+void MainWindow::on_tirarDado_clicked() {
+    /* Estructura del mecanismo de azar */
+    vector < int > pesos = {1, 2, 3, 4, 6};
+    int lados_count = pesos.size();
+    Dado <int> tablillas(lados_count, pesos);
 
-    int numero = 0;
-    numero = 1 + rand() % (6-1);
-    if (5 == numero){
-        numero = 6;
-    }
-    this->dado_result = numero;
+    // Tira dado
+    this->dado_result = tablillas.rollDice();
     QString resultado = QString::number(dado_result);
     ui->resultDado->setText(resultado);
 
