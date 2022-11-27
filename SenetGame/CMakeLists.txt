@@ -36,6 +36,13 @@ set(PROJECT_SOURCES
         ConstructorSerializadorCSV.h
         Casilla.cpp
         Casilla.h
+        ConstructorAbstractaReglas.h
+        ReglaCasillaEspecial.cpp
+        ReglaCasillaEspecial.h
+        ReglaBarrera.h
+        ReglaBarrera.cpp
+        ReglaProteccion.h
+        ReglaProteccion.cpp
 
 )
 

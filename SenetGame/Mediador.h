@@ -8,6 +8,10 @@
 
 #include "Tablero.h"
 #include "Ficha.h"
+#include "ConstructorAbstractaReglas.h"
+#include "ReglaBarrera.h"
+#include "ReglaCasillaEspecial.h"
+#include "ReglaProteccion.h"
 
 /*Definicón Códigos*/
 // Flag: En caso de que jugador 1 gane
@@ -27,30 +31,6 @@ public:
    @param tablero tablero del juego
   */
   Mediador();
-
-  /**
-   @brief Verifica si tres fichas del tipo contrario generan un barrera
-   @param ficha ficha a mover
-   @param movientos Cantidad de casillas a mover
-   @param tablero tablero del juego
-  */
-  bool verificarBarreras(Ficha &ficha, int movimientos, Tablero &tablero);
-
-  /**
-   @brief Verifica si dos fichas del tipo contrario generan una protección
-   @param ficha ficha a mover
-   @param movientos Cantidad de casillas a mover
-   @param tablero tablero del juego
-  */
-  bool verificarProteccion(Ficha &ficha, int movimientos, Tablero &tablero);
-
-  /**
-   @brief Verifica si una ficha cae en las casillas 26, 28 o 29
-   @param ficha ficha a mover
-   @param movientos Cantidad de casillas a mover
-   @param tablero tablero del juego
-  */
-  bool verificarCasillaEspecial(Ficha &ficha, int movimientos, Tablero &tablero);
 
   /**
    @brief Verifica si una ficha saldría del tablero al realizar el mov.
@@ -128,6 +108,13 @@ public:
   */
   int fichasLeftPlayer1 = 5;
   int fichasLeftPlayer2 = 5;
+
+  /**
+   * Declarar reglas
+  */
+  ConstructorAbstractaReglas* reglaproteccion = new ReglaProteccion();
+  ConstructorAbstractaReglas* reglacasillaespecial = new ReglaCasillaEspecial();
+  ConstructorAbstractaReglas* reglabarrera = new ReglaBarrera();
 };
 
 #endif // MEDIADOR_H

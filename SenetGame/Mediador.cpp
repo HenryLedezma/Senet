@@ -11,61 +11,6 @@ using namespace std;
 
 Mediador::Mediador() {}
 
-bool Mediador::verificarBarreras(Ficha &ficha, int movimientos, Tablero &tablero) {
-  // Verifica que las casilla a verificar sí se encuentre ocupada
-  if (tablero.tablero[ficha.getPosicion()].ocupada == true) {
-    int barrera = 0;
-    int limite = ficha.getPosicion() + movimientos;
-    for (int i = ficha.getPosicion(); i < limite; i++) {
-      if (tablero.tablero[i].ocupada == true) {
-        if (tablero.tablero[i].ficha.getJugadorID() != ficha.getJugadorID()) {
-          barrera++;
-        } else {
-          barrera = 0;
-        }
-        if (barrera == 3) {
-          cout << "Existe una barrea!\n";
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-
-bool Mediador::verificarProteccion(Ficha &ficha, int movimientos, Tablero &tablero) {
-  int futura_posc = ficha.getPosicion() + movimientos;
-  int adversario = 0;
-  (ficha.getJugadorID() == 1) ? adversario = 2 :  adversario = 1;
-  bool existeProteccion = false;
-
-  /* Caso ficha adelante */
-  // Revisa que la casilla y las adyacentes estén ocupadas
-  if (tablero.tablero[futura_posc].ocupada == true
-  && tablero.tablero[futura_posc + 1].ocupada == true) {
-    // Revisa que la casilla actual y adyacente pertenezca al adversario
-    if (tablero.tablero[futura_posc].ficha.getJugadorID() == adversario
-    && tablero.tablero[futura_posc + 1].ficha.getJugadorID() == adversario) {
-      existeProteccion = true;
-      cout << "Existe una barrea!\n";
-      return existeProteccion;
-    }
-  }
-  /* Caso ficha detrás */
-  // Revisa que la casilla y las adyacentes estén ocupadas
-  if (tablero.tablero[futura_posc].ocupada == true
-  && tablero.tablero[futura_posc - 1].ocupada == true) {
-    // Revisa que la casilla actual y adyacente pertenezca al adversario
-    if (tablero.tablero[futura_posc].ficha.getJugadorID() == adversario
-    && tablero.tablero[futura_posc - 1].ficha.getJugadorID() == adversario) {
-      existeProteccion = true;
-      cout << "Existe una barrea!\n";
-      return existeProteccion;
-    }
-  }
-  return existeProteccion;
-}
-
 int Mediador::calcularCaidaNilo(Tablero &tablero) {
   int nuevaP = 0;
   if (tablero.tablero[14].ocupada == 0) {
@@ -96,17 +41,6 @@ int Mediador::calcularRetroceso(Ficha &ficha, int movimientos, Tablero &tablero)
   }
   cout << "Hubo un retroceso, la nueva casilla es: " << nuevaP + 1<< "!\n";
   return nuevaP;
-}
-
-bool Mediador::verificarCasillaEspecial(Ficha &ficha, int movimientos, Tablero &tablero) {
-  int futura_posc = ficha.getPosicion() + movimientos;
-  bool casilla_especial = false;
-  if (futura_posc == 25
-  || futura_posc == 27
-  || futura_posc == 28) {
-    casilla_especial = true;
-  }
-  return casilla_especial;
 }
 
 bool Mediador::verificarSalidaTablero(Ficha &ficha, int movimientos, Tablero &tablero) {
@@ -161,10 +95,10 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
   bool futuraCasillaOcupada = tablero.tablero[nuevaPosc].ocupada;
   cout << "La futura posc se encuentra ocupada: " << futuraCasillaOcupada << "\n";
   bool caeNilo = nuevaPosc == 26 ? caeNilo = true : caeNilo = false;
-  bool caeCasillaEspecial = verificarCasillaEspecial(ficha, movimientos, tablero);
+  bool caeCasillaEspecial = reglacasillaespecial->regla("", ficha, movimientos, tablero);
 
   /* Caso: existe una barrera -> retrocede hasta que encuentre posc libre, desde donde está la ficha a mover */
-  existeBarrera = verificarBarreras(ficha, movimientos, tablero);
+  existeBarrera = reglabarrera->regla("",ficha, movimientos, tablero);
   if (existeBarrera) {
     nuevaPosc = calcularRetroceso(ficha, movimientos, tablero);
     moverFicha(ficha, nuevaPosc, tablero);
@@ -173,7 +107,7 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
   }
 
   /* Caso: existe una proteccion -> retrocede hasta que encuentre posc libre, desde donde está la ficha a mover */
-  existeProteccion = verificarProteccion(ficha, movimientos, tablero);
+  existeProteccion = reglaproteccion->regla("",ficha, movimientos, tablero);
   if (existeProteccion) {
     nuevaPosc = calcularRetroceso(ficha, movimientos, tablero);
     moverFicha(ficha, nuevaPosc, tablero);
