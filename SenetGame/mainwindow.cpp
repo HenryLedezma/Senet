@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include "mydialog.h"
 #include <cstdlib>
+#include <iostream>
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -457,13 +459,16 @@ void MainWindow:: endGame(){
 
 void MainWindow::on_guardarButton_clicked()
 {
-    mediador.guardar(tablero);
+    serializador->guardar(tablero);
 }
 
 
 void MainWindow::on_cargarButton_clicked()
+
 {
-    mediador.cargar(tablero);
+    std::string fichas = serializador->cargar(tablero);
+    mediador.fichasLeftPlayer1 = int(fichas[0]);
+    mediador.fichasLeftPlayer2 = int(fichas[1]);
     showTablero(tablero);
 }
 

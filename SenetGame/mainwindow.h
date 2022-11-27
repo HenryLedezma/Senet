@@ -9,6 +9,7 @@
 
 #include "Mediador.h"
 #include "Tablero.h"
+#include "ConstructorSerializadorCSV.h"
 #include "QtWidgets/qlabel.h"
 
 
@@ -22,6 +23,7 @@ QT_END_NAMESPACE
 #define TURN_PLAYER1 99
 // Flag: En caso de el turno sea del jugador 2
 #define TURN_PLAYER2 100
+
 
 class MainWindow : public QMainWindow
 {
@@ -57,6 +59,7 @@ private:
 
     Tablero tablero = Tablero();
     Mediador mediador;
+    ConstructorSerializadorAbstracto* serializador = new ConstructorSerializadorCSV(); // se crea el serializador
     //QVector<QLabel*> casillas;
     //bool winDetected = false;         // Bool si alguien ha ganado
     int dado_result = 0;              // Resultado del dado

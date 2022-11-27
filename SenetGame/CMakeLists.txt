@@ -31,6 +31,12 @@ set(PROJECT_SOURCES
         Mediador.h
         Mediador.cpp
         Partida.csv
+        ConstructorSerializadorAbstracto.h
+        ConstructorSerializadorCSV.cpp
+        ConstructorSerializadorCSV.h
+        Casilla.cpp
+        Casilla.h
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
