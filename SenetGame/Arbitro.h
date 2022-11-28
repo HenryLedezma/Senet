@@ -32,7 +32,7 @@ public:
      @param ocupada (si esta ocupada o no)
      @param turno (si le toca al J1 o J2)
     */
-    bool verificarTurno(bool ocupada, bool turno);
+    bool verificarTurno(bool ocupada, bool turno, int jugador);
 //private:
     /**
        Cuántas fichas restantes tiene cada jugador
