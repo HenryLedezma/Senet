@@ -421,20 +421,15 @@ void MainWindow::on_inputMove_returnPressed()
     ui->inputMove->clear();
     inputMove = in.toInt();
     int poscCasilla = inputMove;
-    if(tablero.tablero[poscCasilla - 1].ocupada == 1){
-        if((!turno && tablero.tablero[poscCasilla - 1].ficha.jugador == 1) ^
-                (turno && tablero.tablero[poscCasilla - 1].ficha.jugador == 2)){
-            //Si el que tiene el turno va a hacer un movimiento en una ficha que le pertenece...
-            ui->textMove->hide();
-            ui->inputMove->hide();
-            ui->sigTurno->show();
-            ui->textMove->setText("¿Qué ficha desea mover? Ingresar el número de casilla en que se encuentra esta:");
-        } else{
-            ui->textMove->setText("Esa ficha no le pertenece, por favor intentelo de nuevo");
-        }
-    }else {
-        ui->textMove->setText("Esa casilla no tiene ninguna ficha, intentelo de nuevo");
+    if(arbitro.verificarTurno(tablero.tablero[poscCasilla - 1].ocupada, turno, tablero.tablero[poscCasilla - 1].ficha.jugador)){
+        ui->textMove->hide();
+        ui->inputMove->hide();
+        ui->sigTurno->show();
+        ui->textMove->setText("¿Qué ficha desea mover? Ingresar el número de casilla en que se encuentra esta:");
+    } else{
+        ui->textMove->setText("Esa ficha no le pertenece, por favor intentelo de nuevo");
     }
+
 }
 
 void MainWindow::showEndLabel(){

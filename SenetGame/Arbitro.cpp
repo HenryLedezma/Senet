@@ -26,3 +26,16 @@ bool Arbitro::sigoJugando(int num_dado) {
     return true;
   }
 }
+
+bool Arbitro::verificarTurno(bool ocupada, bool turno, int jugador){
+    if(ocupada){
+        if((!turno && jugador == 1) ^
+                (turno && jugador == 2)){
+            return true;
+        } else{
+            return false;
+        }
+    }else {
+        return false;
+    }
+}
