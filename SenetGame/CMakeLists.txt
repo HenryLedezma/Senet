@@ -43,7 +43,10 @@ set(PROJECT_SOURCES
         ReglaBarrera.cpp
         ReglaProteccion.h
         ReglaProteccion.cpp
-
+        jugador.h
+        jugador.cpp
+        Arbitro.h
+        Arbitro.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -448,7 +448,7 @@ void MainWindow::showEndLabel(){
 }
 
 void MainWindow:: endGame(){
-    int end = mediador.checkWin();
+    int end = arbitro.checkWin();
     if(end != 0){
         showEndLabel();
     }
@@ -464,8 +464,8 @@ void MainWindow::on_cargarButton_clicked()
 
 {
     std::string fichas = serializador->cargar(tablero);
-    mediador.fichasLeftPlayer1 = int(fichas[0]);
-    mediador.fichasLeftPlayer2 = int(fichas[1]);
+    arbitro.fichasLeftPlayer1 = int(fichas[0]);
+    arbitro.fichasLeftPlayer2 = int(fichas[1]);
     showTablero(tablero);
 }
 

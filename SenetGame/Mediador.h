@@ -12,6 +12,7 @@
 #include "ReglaBarrera.h"
 #include "ReglaCasillaEspecial.h"
 #include "ReglaProteccion.h"
+#include "Arbitro.h"
 
 /*Definicón Códigos*/
 // Flag: En caso de que jugador 1 gane
@@ -33,14 +34,6 @@ public:
   Mediador();
 
   /**
-   @brief Verifica si una ficha saldría del tablero al realizar el mov.
-   @param ficha ficha a mover
-   @param movientos Cantidad de casillas a mover
-   @param tablero tablero del juego
-  */
-  bool verificarSalidaTablero(Ficha &ficha, int movimientos, Tablero &tablero);
-
-  /**
    @brief Busca todas las validaciones necesarias para realizar un movimiento
    @param ficha ficha a mover
    @param movientos Cantidad de casillas a mover
@@ -54,18 +47,6 @@ public:
    @param movientos Nueva posc
   */
   void intercambiar(Ficha &ficha, int nuevaP, Tablero &tablero);
-
-  /**
-   @brief Revisa si algún jugador ganó la partida
-   @return Alguna de las 3 flags definidas
-  */
-  int checkWin();
-
-  /**
-   @brief Revisa si algún jugador ganó la partida
-   @return Alguna de las 3 flags definidas
-  */
-  bool sigoJugando(int num_dado);
 
 //private:
   /**
@@ -103,11 +84,6 @@ public:
   */
   void cargar(Tablero &tablero);
 
-  /**
-   Cuántas fichas restantes tiene cada jugador
-  */
-  int fichasLeftPlayer1 = 5;
-  int fichasLeftPlayer2 = 5;
 
   /**
    * Declarar reglas
@@ -115,6 +91,8 @@ public:
   ConstructorAbstractaReglas* reglaproteccion = new ReglaProteccion();
   ConstructorAbstractaReglas* reglacasillaespecial = new ReglaCasillaEspecial();
   ConstructorAbstractaReglas* reglabarrera = new ReglaBarrera();
+
+  Arbitro arbitro;
 };
 
 #endif // MEDIADOR_H

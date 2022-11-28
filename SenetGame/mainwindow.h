@@ -10,6 +10,7 @@
 #include "Mediador.h"
 #include "Tablero.h"
 #include "Dado.h"
+#include "Arbitro.h"
 #include "ConstructorSerializadorCSV.h"
 #include "QtWidgets/qlabel.h"
 
@@ -58,6 +59,7 @@ private:
     Ui::MainWindow *ui;
     bool turno = false;
 
+    Arbitro arbitro;
     Tablero tablero = Tablero();
     Mediador mediador;
     ConstructorSerializadorAbstracto* serializador = new ConstructorSerializadorCSV(); // se crea el serializador

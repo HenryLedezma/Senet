@@ -43,14 +43,6 @@ int Mediador::calcularRetroceso(Ficha &ficha, int movimientos, Tablero &tablero)
   return nuevaP;
 }
 
-bool Mediador::verificarSalidaTablero(Ficha &ficha, int movimientos, Tablero &tablero) {
-  if (tablero.tablero[ficha.getPosicion()].ocupada == true
-  && ficha.getPosicion()  + movimientos > 29) {
-    return true;
- }
- return false;
-}
-
 void Mediador::moverFicha(Ficha &ficha, int nuevaP, Tablero &tablero) {
   // Si la casilla a utilizar está ocupada retrocede hasta encontrar una libre
   while (tablero.tablero[nuevaP].ocupada == true) {
@@ -116,10 +108,10 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
   }
 
   /* Caso: no existe ningúna barrera y la ficha se saldría del tablero -> se mueve con normalidad */
-  saleTablero = verificarSalidaTablero(ficha, movimientos, tablero);
+  saleTablero = arbitro.verificarSalidaTablero(ficha, movimientos, tablero);
   if (saleTablero == true && existeBarrera == false) {
     tablero.tablero[ficha.getPosicion()].ocupada = 0;
-    (ficha.getJugadorID() == 1) ? fichasLeftPlayer1-- :  fichasLeftPlayer2--;
+    (ficha.getJugadorID() == 1) ? arbitro.fichasLeftPlayer1-- :  arbitro.fichasLeftPlayer2--;
     realizoMovimiento = true;
     return realizoMovimiento;
   }
@@ -155,24 +147,6 @@ bool Mediador::realizarMovimiento(Ficha &ficha, int movimientos, Tablero &tabler
     return realizoMovimiento;
   }
   return realizoMovimiento;
-}
-
-int Mediador::checkWin() {
-  if (fichasLeftPlayer1 == 0) {
-    return PLAYER1_WINS;
-  }
-  if (fichasLeftPlayer2 == 0) {
-    return PLAYER2_WINS;
-  }
-  return NO_WIN;
-}
-
-bool Mediador::sigoJugando(int num_dado) {
-  if ((num_dado == 2) || (num_dado == 3)) {
-    return false;
-  } else {
-    return true;
-  }
 }
 
 
@@ -215,7 +189,7 @@ void Mediador::cargar(Tablero &tablero) {
   // Leemos todas las líneas
   while (getline(archivo, linea, delimitador)){
     if(linea == "30"){
-      fichasLeftPlayer1 = cantidadF;
+      arbitro.fichasLeftPlayer1 = cantidadF;
       jugador = 2;
       cantidadF = 0;
     }
@@ -225,7 +199,7 @@ void Mediador::cargar(Tablero &tablero) {
       tablero.tablero[posicion].ocupada = 1;
       tablero.tablero[posicion].ficha.posc = posicion;
       cantidadF += 1;
-      fichasLeftPlayer2 = cantidadF;
+      arbitro.fichasLeftPlayer2 = cantidadF;
     }
   }
   archivo.close();
