@@ -1,3 +1,8 @@
+/*
+*   Implementación de clase,
+*   Simula la regla proteccion
+*/
+
 #include "ReglaProteccion.h"
 
 ReglaProteccion::ReglaProteccion()

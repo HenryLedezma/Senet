@@ -16,6 +16,10 @@ public:
     bool ocupada = 0;
     int bloqueada = 0;
     Ficha ficha;
+
+    /**
+    @brief Default constructor
+    */
     Casilla();
 
 };

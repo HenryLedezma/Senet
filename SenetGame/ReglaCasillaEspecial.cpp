@@ -1,3 +1,8 @@
+/*
+*   Implementación de clase,
+*   Simula la regla especial
+*/
+
 #include "ReglaCasillaEspecial.h"
 
 ReglaCasillaEspecial::ReglaCasillaEspecial()

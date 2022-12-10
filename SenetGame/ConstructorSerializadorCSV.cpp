@@ -1,5 +1,9 @@
-#include "ConstructorSerializadorCSV.h"
+/*
+*   Implementación de clase,
+*   Simula ser un serializador CSV
+*/
 
+#include "ConstructorSerializadorCSV.h"
 
 ConstructorSerializadorCSV::ConstructorSerializadorCSV()
 {

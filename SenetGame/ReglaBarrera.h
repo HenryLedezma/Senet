@@ -3,6 +3,9 @@
 #include <sstream>
 #include "ConstructorAbstractaReglas.h"
 
+/**
+ @brief Simula la regla barrera
+*/
 class ReglaBarrera : public ConstructorAbstractaReglas
 {
 public:

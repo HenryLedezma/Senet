@@ -1,3 +1,8 @@
+/*
+*   Implementación de clase,
+*   Simula la regla barrera
+*/
+
 #include "ReglaBarrera.h"
 
 ReglaBarrera::ReglaBarrera()

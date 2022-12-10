@@ -3,6 +3,9 @@
 #include <sstream>
 #include "ConstructorAbstractaReglas.h"
 
+/**
+ @brief Simula la regla proteccion
+*/
 class ReglaProteccion: public ConstructorAbstractaReglas
 {
 public:
