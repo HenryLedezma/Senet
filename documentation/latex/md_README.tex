@@ -1,0 +1,27 @@
+\hypertarget{md_README_autotoc_md1}{}\doxysection{$<$em$>$\+Descripción del Programa$<$/em$>$}\label{md_README_autotoc_md1}
+El programa se encarga de simular el juego egipsio {\bfseries{Senet}}. Esto cumple con el proyecto del curso \char`\"{}\+Diseño de Software\char`\"{}.\hypertarget{md_README_autotoc_md2}{}\doxysection{$<$em$>$\+Manual de usuario$<$/em$>$}\label{md_README_autotoc_md2}
+\hypertarget{md_README_autotoc_md3}{}\doxysubsection{Modo de uso}\label{md_README_autotoc_md3}
+El juego se puede jugar de dos formas, por terminal o por medio de una {\itshape GUI} construida con el programa {\itshape QT}. A continuación se dan instrucciones de cómo construir y correr el juego en consola. Para correrlo con la {\itshape GUI} deberá instalar el programa y construir el programa. IMPORTANTE\+: El ejecutable únicamente funciona en el sistema operativo de Linux, siempre y cuando se tenga instalado QT, y sus librerias para hacer uso de la interfaz.\hypertarget{md_README_autotoc_md4}{}\doxysubsection{$<$em$>$\+Como correr el archivo ejecutable\+:$<$/em$>$}\label{md_README_autotoc_md4}
+Debe irse a la terminal, a la carpeta /exe, y estando aqui, hacer doble click a la aplicacion.\hypertarget{md_README_autotoc_md5}{}\doxysection{$<$em$>$\+Reglas del Juego$<$/em$>$}\label{md_README_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item Se ubican las fichas en el tablero sobre la primera fila intercalando blancas y negras alternativamente, comenzando por la ficha blanca en el casillero1.
+\item Empieza el jugador 1.
+\item El turno acaba cuando el jugador saca un 2 ó un 3, (pasa el turno después de mover una ficha la cantidad de espacios correspondientes a esta última lanzada). Mientras tanto el jugador sigue lanzando y jugando hasta sacar este 2 ó 3.
+\item Si una ficha cae en un lugar ocupado por el adversario las fichas intercambian lugares.
+\item Dos fichas juntas del mismo jugador bloquean la posibilidad del adversario de intercambiar las fichas.
+\item Tres fichas juntas del mismo jugador no pueden ser sobrepasadas por una del adversario a pesar de que el valor de la lanzada lo permita.
+\item Si una ficha no puede adelantar, debe entonces retroceder.
+\item Si ninguna de las fichas del jugador pueden ser movidas, pasa entonces el turno al adversario.
+\item Si una ficha se encuentra en las casillas de seguridad número 26, 28 o 29 no puede ser intercambiada por una del adversario.
+\item Si una ficha cae en el río Nilo, casillero número 27, debe retroceder al casillero número 15. Si este casillero está ya ocupado por una ficha, propia o del adversario, debe entonces seguir retrocediendo hasta el casillero número 1.
+\item Las fichas continúan su camino hasta salir del tablero. No es necesario sacar las fichas con el valor exacto.
+\item No se pueden sacar fichas del tablero mientras haya alguna ficha propia en el primer fila del tablero.
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md6}{}\doxysection{$<$em$>$\+Créditos$<$/em$>$}\label{md_README_autotoc_md6}
+Josué Retana Rodríguez C06440
+
+Hansell Solís Ramírez, C07677
+
+Judith Vargas Esquivel, C08168
+
+Henry Ledezma Vindas, C04185 
